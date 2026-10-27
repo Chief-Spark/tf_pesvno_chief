@@ -1,0 +1,8 @@
+terraform {
+  backend "s3" {
+    region         = ""
+    bucket         = ""
+    key            = ""
+    dynamodb_table = "" //Comentar para sandbox
+  }
+}

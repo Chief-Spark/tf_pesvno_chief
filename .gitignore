@@ -1,0 +1,18 @@
+
+  
+#Experian aditional rules
+.scannerwork/
+target/
+*.classpath
+*.project
+.settings/
+*.bak
+*.orig
+*.7z
+
+# Tests
+trunk/tests/
+
+
+# Kiro
+.kiro/

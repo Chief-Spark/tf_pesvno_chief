@@ -1,0 +1,85 @@
+version: 1.0.1
+global:
+  application: PESVNO-cloud
+  tech: terraform
+  language: terraform
+  jdk: 8
+  
+develop:
+  before_build:
+    checkmarx:
+        projectNameCx: SCPEBA/EITS SLA CO PROCESOS ESPECIALES BATCH AWS/tf_pesvno
+  before_deploy:
+    cmd: |-
+      mkdir -p develop/src/
+      cp -r trunk/* develop/
+  deploy:
+    terraform:
+      accountid: 651706752126
+      tfVersion: 1.9.0
+qa:
+  before_build:
+    checkmarx:
+        projectNameCx: SCPEBA/EITS SLA CO PROCESOS ESPECIALES BATCH AWS/tf_pesvno
+  before_deploy:
+    cmd: |-
+      mkdir -p qa/src/
+      cp -r trunk/* qa/
+  build:
+    zip:
+      zipFile: PESVNO-cloud.zip
+  after_build:
+    sonarQubeScan:
+      sources: trunk
+      projectKey: SP-LATAM:EITS:DevSecOps:26099_Procesos-Especiales-Batch-AWS
+      projectName: SP-LATAM:EITS:DevSecOps:26099_Procesos-Especiales-Batch-AWS
+      projectVersion: 1.0
+  deploy:
+    terraform:
+      accountid: 124355679563
+      tfVersion: 1.9.0
+demo:
+  before_deploy:
+    cmd: |-
+      mkdir -p demo/src/
+      cp -r trunk/* demo/
+  deploy:
+    terraform:
+      accountid: 311141534073
+      tfVersion: 1.9.0
+production:
+  before_deploy:
+    cmd: |-
+      mkdir -p production/src/
+      cp -r trunk/* production/
+  deploy:
+    terraform:
+      accountid: 324037294240
+      tfVersion: 1.9.0
+qa_rllbck:
+  before_deploy:
+    cmd: |-
+      mkdir -p qa/src/
+      cp -r trunk/* qa/
+  deploy:
+    terraform:
+      accountid: 124355679563
+      tfVersion: 1.9.0
+demo_rllbck:
+  before_deploy:
+    cmd: |-
+      mkdir -p demo/src/
+      cp -r trunk/* demo/
+  deploy:
+    terraform:
+      accountid: 311141534073
+      tfVersion: 1.9.0
+production_rllbck:
+  before_deploy:
+    cmd: |-
+      mkdir -p production/src/
+      cp -r trunk/* production/
+  deploy:
+    terraform:
+      accountid: 324037294240
+      tfVersion: 1.9.0
